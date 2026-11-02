@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.private/
+**/pin.secret.*
+*.xlsx
+*.csv
+*.tsv
+.env*
+!.env.example

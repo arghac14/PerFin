@@ -1,0 +1,12 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.resolve(__dirname,'..');
+require('./configure-pin.cjs');
+const out = path.join(root,'dist');
+fs.mkdirSync(out,{recursive:true});
+for(const file of ['index.html','icon.svg','icon-192.png','icon-512.png','manifest.webmanifest','sw.js'])fs.copyFileSync(path.join(root,file),path.join(out,file));
+for(const dir of ['app','vendor'])fs.cpSync(path.join(root,dir),path.join(out,dir),{recursive:true});
+fs.copyFileSync(path.join(root,'app/core.js'),path.join(root,'apps-script/Core.gs'));
+fs.copyFileSync(path.join(root,'app/workbook.js'),path.join(root,'apps-script/Workbook.gs'));
+fs.copyFileSync(path.join(root,'app/insights.js'),path.join(root,'apps-script/Insights.gs'));
+console.log('Static app: dist/ | Google bridge: apps-script/ | No financial data included.');
